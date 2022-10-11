@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct Node{
+    int data;
+    Node* next;
+};
+Node* create(int data) {
+    Node* Newnode = new Node();
+    Newnode->data = data;
+    Newnode->next = NULL;
+    return Newnode;
+}
+void printNode(Node* head) {
+    if(head == NULL) return ;
+    Node* cur = head;
+    do {
+        cout<<cur->data<<" ";
+        cur = cur->next;
+    }while(cur!=head);
+}
+
+void reverse(Node** head) {
+    if(*head == NULL ) return ;
+    Node* prev = NULL;
+    Node* cur = (*head);
+    Node* nexT;
+    do{
+        nexT = cur->next;
+        cur->next = prev;
+        prev = cur;
+        cur = nexT;
+    }while(cur!=(*head));
+    (*head)->next = prev;
+    *head = prev;
+}
+
+int main() {
+    Node* head = create(1);
+    head->next = create(2);
+    head->next->next = create(3);
+    head->next->next->next = create(4);
+    head->next->next->next->next = create(5);
+    head->next->next->next->next->next = create(6);
+    head->next->next->next->next->next->next = head;
+    printNode(head);
+
+    cout<<endl<<"reverse circular"<<endl;
+    reverse(&head);
+    printNode(head);
+    return 0;
+
+}
